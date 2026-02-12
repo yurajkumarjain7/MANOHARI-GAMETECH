@@ -8,7 +8,7 @@ const config = {
         right: "aright.html"
     },
     "frameworkB.html": {
-        default: "frameworkB.html",
+        default: "frameworkB.html"
         top: "bup.html",
         bottom: "bdown.html",
         left: "bleft.html",
