@@ -1,4 +1,4 @@
-// for gravity (object/developer can edit this for throw)
+// for gravity (developer can edit this for throw)
 let obj = document.getElementById("object");
 
 let position = 0;
@@ -17,3 +17,16 @@ function throwObject() {
 
   fall();
 }
+
+
+// colision logic
+function update() {
+    if (isTouching(object, object)) {
+        //function 
+      ;
+    }
+    //function 
+  ;
+} //developer can edit this according to his need
+
+
