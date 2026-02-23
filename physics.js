@@ -24,6 +24,18 @@ function isTouching(rect1, rect2) {
     );
 }
 
+
+// . The Throw Function
+// Call this via a button click or key press
+function throwObject() {
+    // Give it a burst of upward speed (negative value moves it UP)
+    velocity = -15; 
+    
+    // Change image to the "In Air" version immediately
+    obj.src = airImage;
+    
+    console.log("Object Thrown!");
+}
 // 3. The Main Game Loop
 function gameLoop() {
     // --- Physics & Image Swapping ---
