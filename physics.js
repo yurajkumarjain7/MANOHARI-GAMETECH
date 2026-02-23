@@ -1,13 +1,17 @@
-// 1. Setup variables
-const obj = document.getElementById("object");
-const obstacle = document.getElementById("obstacle"); // Second object for collision
+// 1. Setup Elements and Variables
+const obj = document.getElementById("object"); // This should be an <img> tag
+const obstacle = document.getElementById("obstacle");
 
 let position = 0;
 let velocity = 0;
-let gravity = 0.8; 
-let ground = 400; 
+const gravity = 0.8; 
+const ground = 400; 
 
-// 2. Collision Detection Function (AABB)
+// Image URLs (Replace these with your actual file paths)
+const airImage = "falling.png"; 
+const groundImage = "landed.png";
+
+// 2. Collision Detection Function
 function isTouching(rect1, rect2) {
     const r1 = rect1.getBoundingClientRect();
     const r2 = rect2.getBoundingClientRect();
@@ -20,31 +24,38 @@ function isTouching(rect1, rect2) {
     );
 }
 
-// 3. The Combined Update/Fall Loop
+// 3. The Main Game Loop
 function gameLoop() {
-    // --- Physics Logic ---
+    // --- Physics & Image Swapping ---
     if (position < ground) {
         velocity += gravity;
         position += velocity;
+        
+        // Optional: Ensure it shows the "air" image while falling
+        if (obj.src !== airImage) obj.src = airImage; 
     } else {
         position = ground;
-        velocity = 0; // Stop at ground
+        velocity = 0;
+
+        // CHANGE IMAGE: Triggered when hitting the ground
+        if (obj.src !== groundImage) {
+            obj.src = groundImage;
+            console.log("Object has landed!");
+        }
     }
     
-    // Apply position to DOM
+    // Apply movement
     obj.style.top = position + "px";
 
     // --- Collision Logic ---
     if (isTouching(obj, obstacle)) {
-        obj.style.backgroundColor = "red"; // Visual feedback for hit
-        console.log("Collision detected!");
+        obj.style.border = "2px solid red"; // Highlight collision
     } else {
-        obj.style.backgroundColor = "blue"; // Normal state
+        obj.style.border = "none";
     }
 
-    // Keep the loop running
     requestAnimationFrame(gameLoop);
 }
 
-// Start the engine
+// Start the loop
 gameLoop();
